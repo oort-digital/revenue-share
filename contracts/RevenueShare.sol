@@ -56,6 +56,11 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
     }
 
     function withdrawl() public {
+
+        require(
+            msg.sender == oortWithdrawlAddress ||
+            msg.sender == envelopWithdrawlAddress
+        , 'Caller has no permision');
         uint256 oortBalance = getOortBalance();
         uint256 envelopBalance = getEnvelopBalance();
         IERC20(acceptedPayTokenAddress).transfer(oortWithdrawlAddress, oortBalance);
