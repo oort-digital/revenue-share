@@ -12,9 +12,16 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
     
     uint8 public oortProportion;
 
-    function initialize(address payTokenAddress) initializer public {
+    function initialize(
+            address payTokenAddress,
+            address oortAddress,
+            address envelopAddress,
+            uint8 proportion) initializer public {
         OwnableUpgradeable.__Ownable_init();
         acceptedPayTokenAddress = payTokenAddress;
+        oortWithdrawlAddress = oortAddress;
+        envelopWithdrawlAddress = envelopAddress;
+        oortProportion = proportion;
     }
 
     function setOortWithdrawlAddress(address oortAddress) public onlyOwner {
@@ -40,11 +47,11 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
         return totalBalance / 100 * proportion;
     }
 
-    function getOortBalance() private view returns (uint256) {
+    function getOortBalance() public view returns (uint256) {
         return getProportionalBalance(oortProportion);
     }
 
-    function getEnvelopBalance() private view returns (uint256) {
+    function getEnvelopBalance() public view returns (uint256) {
         return getProportionalBalance(100 - oortProportion);
     }
 

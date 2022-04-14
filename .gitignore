@@ -1,5 +1,6 @@
 node_modules
 types
+test
 build/contracts/*.json
 !build/contracts/Migrations.json
 !build/contracts/RevenueShare.json
