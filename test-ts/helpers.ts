@@ -15,6 +15,7 @@ export interface ITxError {
 }
 
 export function toTxError(error: any): ITxError {
+    if(error['reason']) { return error }
     const data = error.data
     const errKey = Object.keys(data)[0];
     return data[errKey]
