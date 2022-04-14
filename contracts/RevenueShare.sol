@@ -25,16 +25,18 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
     }
 
     function setOortWithdrawlAddress(address oortAddress) public onlyOwner {
+        require(oortAddress != address(0), 'New oortWithdrawlAddress is the zero address');
         oortWithdrawlAddress = oortAddress;
     }
 
     function setEnvelopWithdrawlAddress(address envelopAddress) public onlyOwner {
+        require(envelopAddress != address(0), 'New envelopWithdrawlAddress is the zero address');
         envelopWithdrawlAddress = envelopAddress;
     }
 
     function setOortProportion(uint8 proportion) public onlyOwner {
         require(proportion <= 100, 'Cannot set proportion more that 100%');
-        require(proportion > 0, 'Cannot be zero');
+        require(proportion > 0, 'Cannot set zero proportion');
         oortProportion = proportion;
     }
 

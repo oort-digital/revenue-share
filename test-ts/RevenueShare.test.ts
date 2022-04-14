@@ -3,7 +3,7 @@ import {
     RevenueShareInstance,
     TestERC20Instance,
 } from "../types/truffle-contracts";
-import { BN_ZERO, parseDecimalValue } from "./helpers";
+import { assertErrorReason, BN_ZERO, parseDecimalValue, ZERO_ADDRESS } from "./helpers";
 
 const TestERC20Contract = artifacts.require('TestERC20');
 const RevenueShareContract = artifacts.require('RevenueShare');
@@ -76,16 +76,22 @@ contract('RevenueShare', (accounts) => {
     });
 
     it('withdrawl no premission', async () => {
-        try {
-            await revenueShare.withdrawl({ from: otherAddress })
-        }
-        catch(error: any) {
-            const data = error.data
-            const errKey = Object.keys(data)[0];
-            expect(data[errKey].reason).to.eq('Caller has no permision')
-        }
-
-     
+        await assertErrorReason(() => revenueShare.withdrawl({ from: otherAddress }), 'Caller has no permision')
     });
 
-});
+    it('cannotset zero proportion', async () => {
+        await assertErrorReason(() => revenueShare.setOortProportion(0, { from: owner }), 'Cannot set zero proportion')
+    });
+
+    it('cannot set proportion more than 100', async () => {
+        await assertErrorReason(() => revenueShare.setOortProportion(101, { from: owner }), 'Cannot set proportion more that 100%')
+    });
+
+    it('cannot set envelopWithdrawlAddress zero', async () => {
+        await assertErrorReason(() => revenueShare.setEnvelopWithdrawlAddress(ZERO_ADDRESS, { from: owner }), 'New envelopWithdrawlAddress is the zero address')
+    });
+
+    it('cannot set oortWithdrawlAddress zero', async () => {
+        await assertErrorReason(() => revenueShare.setOortWithdrawlAddress(ZERO_ADDRESS, { from: owner }), 'New oortWithdrawlAddress is the zero address')
+    });
+})
