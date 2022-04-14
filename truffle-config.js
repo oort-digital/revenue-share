@@ -34,11 +34,19 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
+  oortProportion: 70,
+
   networks: {
     development: {
       host: '127.0.0.1',     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: '*',       // Any network (default: none)
+      migration_config: {
+        payTokenAddr:      "0x0000000000000000000000000000000000000001",
+        oortWithdrawlAddr: "0x0000000000000000000000000000000000000002",
+        envelopWithdrawlAddr: "0x0000000000000000000000000000000000000003",
+        isTest: true
+       }
     }
   },
 
