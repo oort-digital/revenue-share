@@ -1,0 +1,8 @@
+node_modules
+types
+build/contracts/*.json
+!build/contracts/Migrations.json
+!build/contracts/RevenueShare.json
+
+package-lock.json
+yarn.lock
