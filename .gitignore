@@ -7,5 +7,4 @@ build/contracts/*.json
 !build/contracts/RevenueShare.json
 .openzeppelin/unknown-*.json
 
-package-lock.json
 yarn.lock
