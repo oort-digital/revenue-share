@@ -10,13 +10,15 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
     address public oortWithdrawlAddress;
     address public envelopWithdrawlAddress;
     
-    uint8 public oortProportion;
+    //has 2 decimals
+    // for example 100.5 = 10050
+    uint16 public oortProportion;
 
     function initialize(
             address payTokenAddress,
             address oortAddress,
             address envelopAddress,
-            uint8 proportion) initializer public {
+            uint16 proportion) initializer public {
         OwnableUpgradeable.__Ownable_init();
         acceptedPayTokenAddress = payTokenAddress;
         oortWithdrawlAddress = oortAddress;
@@ -34,8 +36,8 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
         envelopWithdrawlAddress = envelopAddress;
     }
 
-    function setOortProportion(uint8 proportion) public onlyOwner {
-        require(proportion <= 100, 'Cannot set proportion more that 100%');
+    function setOortProportion(uint16 proportion) public onlyOwner {
+        require(proportion <= 10000, 'Cannot set proportion more that 10000');
         require(proportion > 0, 'Cannot set zero proportion');
         oortProportion = proportion;
     }
@@ -44,9 +46,9 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
         return IERC20(acceptedPayTokenAddress).balanceOf(address(this));
     }
 
-    function getProportionalBalance(uint8 proportion) private view returns (uint256) {
+    function getProportionalBalance(uint16 proportion) private view returns (uint256) {
         uint256 totalBalance = IERC20(acceptedPayTokenAddress).balanceOf(address(this));
-        return totalBalance / 100 * proportion;
+        return totalBalance / 10000 * proportion;
     }
 
     function getOortBalance() public view returns (uint256) {
@@ -54,7 +56,7 @@ contract RevenueShare is Initializable, OwnableUpgradeable {
     }
 
     function getEnvelopBalance() public view returns (uint256) {
-        return getProportionalBalance(100 - oortProportion);
+        return getProportionalBalance(10000 - oortProportion);
     }
 
     function withdrawl() public {
