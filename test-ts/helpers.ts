@@ -86,5 +86,8 @@ export async function assertErrorReason(func: () => Promise<any>, expectedReason
     catch(error: any) {
         const txErr = toTxError(error)
         expect(txErr.reason).to.eq(expectedReason)
+        return;
     }
+
+    throw new Error(`Expected error with reason: '${expectedReason}'`)
 }
