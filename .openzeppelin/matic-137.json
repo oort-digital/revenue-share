@@ -1,0 +1,98 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xB90EABb28F4f34Ad3c0Cc7F8D6BC5af3BFc44e60",
+    "txHash": "0x8987ab11e2aaf7d281e8fbfc5e4441863643f78a529dc43856efbbda85378322"
+  },
+  "proxies": [
+    {
+      "address": "0x91e2FF91EDC6F0e99a853600616C484305b4a87d",
+      "txHash": "0xed6e9a5671718ffa70ddbec4049f45de42d9ac7ffe2c4378d4c07ec31ba27bba",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "3369edf1a0d2cc92ee8981bf5f330106c39c163e1fb27c7ebde8765600b747d4": {
+      "address": "0x0DB6962Afc2b58a434Dbc4c35a38D8Ca1307F666",
+      "txHash": "0xe735b307f6b5b29d7f1577643c8e41f627c4d8f57c8898023ba28e71955f6ec3",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:87"
+          },
+          {
+            "contract": "RevenueShare",
+            "label": "acceptedPayTokenAddress",
+            "type": "t_address",
+            "src": "..\\project:\\contracts\\RevenueShare.sol:9"
+          },
+          {
+            "contract": "RevenueShare",
+            "label": "oortWithdrawlAddress",
+            "type": "t_address",
+            "src": "..\\project:\\contracts\\RevenueShare.sol:10"
+          },
+          {
+            "contract": "RevenueShare",
+            "label": "envelopWithdrawlAddress",
+            "type": "t_address",
+            "src": "..\\project:\\contracts\\RevenueShare.sol:11"
+          },
+          {
+            "contract": "RevenueShare",
+            "label": "oortProportion",
+            "type": "t_uint16",
+            "src": "..\\project:\\contracts\\RevenueShare.sol:15"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint16": {
+            "label": "uint16"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    }
+  }
+}
