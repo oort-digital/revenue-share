@@ -8,6 +8,7 @@ interface INetworkConfig {
   payTokenAddr: string
   oortWithdrawlAddr: string
   envelopWithdrawlAddr: string
+  gnosisSafe?: string
   isTest: boolean
 }
 
@@ -51,7 +52,7 @@ class Assert {
     return networkConfig
   }
 
-  static address(address: string) {
+  static address(address: string | undefined) {
     if(!address) {
       throw new Error('Invalid address')
     }
