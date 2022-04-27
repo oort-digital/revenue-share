@@ -45,6 +45,7 @@ module.exports = {
         payTokenAddr:      "0x0000000000000000000000000000000000000001",
         oortWithdrawlAddr: "0x0000000000000000000000000000000000000002",
         envelopWithdrawlAddr: "0x0000000000000000000000000000000000000003",
+        gnosisSafe: "0x303C01ADf7C086CDc11d24Edc61058975bcF910C",
         isTest: true
        }
     }
