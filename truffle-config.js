@@ -1,27 +1,16 @@
-/**
- * Use this file to configure your truffle project. It's seeded with some
- * common settings for different networks and features like migrations,
- * compilation and testing. Uncomment the ones you need or modify
- * them to suit your project as necessary.
- *
- * More information about configuration can be found at:
- *
- * trufflesuite.com/docs/advanced/configuration
- *
- * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
- * to sign your transactions before they're sent to a remote public node. Infura accounts
- * are available for free at: infura.io/register.
- *
- * You'll also need a mnemonic - the twelve word phrase the wallet uses to generate
- * public/private key pairs. If you're publishing your code to GitHub make sure you load this
- * phrase from a file you've .gitignored so it doesn't accidentally become public.
- *
- */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+function createHDWalletProvider(providerOrUrl, chainId) {
+  const { mnemonic } = require('./secrets.json');
+  return new HDWalletProvider({
+    mnemonic: {
+      phrase: mnemonic
+    },
+    providerOrUrl:  providerOrUrl,
+    chainId: chainId
+  })
+}
 
 module.exports = {
   /**
@@ -34,7 +23,7 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
-  oortProportion: 70,
+  oortProportion: 80,
 
   networks: {
     development: {
@@ -48,7 +37,33 @@ module.exports = {
         gnosisSafe: "0x303C01ADf7C086CDc11d24Edc61058975bcF910C",
         isTest: true
        }
-    }
+    },
+
+
+    matic: {
+/*
+if some errors, try to switch RPCs:
+https://rpc-mainnet.matic.network
+https://rpc-mainnet.maticvigil.com
+https://rpc-mainnet.matic.quiknode.pro
+https://matic-mainnet.chainstacklabs.com
+https://matic-mainnet-full-rpc.bwarelabs.com
+https://matic-mainnet-archive-rpc.bwarelabs.com
+*/
+      provider: () => createHDWalletProvider("https://rpc-mainnet.maticvigil.com", 137),
+      network_id: 137,
+      confirmations: 2,
+      timeoutBlocks: 30000,
+      gasPrice: 49000000000,
+      skipDryRun: true,
+      networkCheckTimeout:100000,
+      migration_config: {
+        payTokenAddr:      "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+        oortWithdrawlAddr: "0x69d1fbEF560978B033c00faE1A3660D397Ce78a2",
+        envelopWithdrawlAddr: "0x4AC9aB28957aA70d5f28e6e4918bf12D9558B87C",
+        gnosisSafe: "0x69d1fbEF560978B033c00faE1A3660D397Ce78a2"
+      }
+    },
   },
 
   // Set default mocha options here, use special reporters etc.
