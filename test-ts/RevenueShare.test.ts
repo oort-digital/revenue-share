@@ -47,13 +47,13 @@ contract('RevenueShare', (accounts) => {
         const totalBalance = parseTokenAmount(await revenueShare.getTotalBalance())
         const envelopBalance = parseTokenAmount(await revenueShare.getEnvelopBalance())
         const oortBalance = parseTokenAmount(await revenueShare.getOortBalance())
-        /*
-        console.log('totalBalance:              ',  totalBalance)
-        console.log('expectedEnvelopBalance:    ',  expectedEnvelopBalance)
-        console.log('envelopBalance:            ',  envelopBalance)
-        console.log('expectedOortBalance:       ',  expectedOortBalance)
-        console.log('oortBalance:               ',  oortBalance)
-        */
+        
+        // console.log('totalBalance:              ',  totalBalance)
+        // console.log('expectedEnvelopBalance:    ',  expectedEnvelopBalance)
+        // console.log('envelopBalance:            ',  envelopBalance)
+        // console.log('expectedOortBalance:       ',  expectedOortBalance)
+        // console.log('oortBalance:               ',  oortBalance)
+        
         
         expect(totalBalance).eq(balance.toString())
         expect(oortBalance).eq(expectedOortBalance.toString())
@@ -81,16 +81,12 @@ contract('RevenueShare', (accounts) => {
         expect(envelopBalance).eq(expectedEnvelopBalance.toString())
     });
 
-    it('withdrawl no premission', async () => {
-        await assertErrorReason(() => revenueShare.withdrawl({ from: otherAddress }), 'Caller has no permision')
-    });
-
     it('cannotset zero proportion', async () => {
         await assertErrorReason(() => revenueShare.setOortProportion(0, { from: owner }), 'Cannot set zero proportion')
     });
 
-    it('cannot set proportion more than 100', async () => {
-        await assertErrorReason(() => revenueShare.setOortProportion(101, { from: owner }), 'Cannot set proportion more that 100%')
+    it('cannot set proportion more than 10000', async () => {
+        await assertErrorReason(() => revenueShare.setOortProportion(10001, { from: owner }), 'Cannot set proportion more that 10000')
     });
 
     it('cannot set envelopWithdrawlAddress zero', async () => {
