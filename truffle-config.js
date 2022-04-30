@@ -1,8 +1,9 @@
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
-function createHDWalletProvider(providerOrUrl, chainId) {
-  const { mnemonic } = require('./secrets.json');
+const { mnemonic } = require('./secrets.json');
+
+function createHDWalletProvider(providerOrUrl, chainId) {  
   return new HDWalletProvider({
     mnemonic: {
       phrase: mnemonic
@@ -23,7 +24,7 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
-  oortProportion: 80,
+  oortProportion: 70,
 
   networks: {
     development: {
@@ -39,6 +40,19 @@ module.exports = {
        }
     },
 
+    bsc: {
+      provider: () => new HDWalletProvider(mnemonic, 'https://bsc-dataseed1.binance.org'),
+      network_id: 56,
+      confirmations: 2,
+      timeoutBlocks: 30000,
+      skipDryRun: true,
+      migration_config: {
+        payTokenAddr: '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3',
+        oortWithdrawlAddr: "0x0D9176F223d368dffD75040bdfCc4098eF4dc518",
+        envelopWithdrawlAddr: "0x70eaa01346E5908c7a0Bd0C36811232C03F101e1",
+        gnosisSafe: "0x0D9176F223d368dffD75040bdfCc4098eF4dc518"
+      }
+    },
 
     matic: {
 /*
